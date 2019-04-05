@@ -72,16 +72,16 @@ int queue_get_new_direction(int last_floor, int last_direction){
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 //Check if order in same direction or command in current floor
 	if (current_floor == 0){
-		if ((queue[(((current_floor)*3)+QUEUE_CALL_UP)]==1 || queue[(((current_floor)*3)+QUEUE_COMMAND)]==1)){
+		if ((queue[((current_floor*3)+QUEUE_CALL_UP)]==1 || queue[(((current_floor)*3)+QUEUE_COMMAND)]==1)){
 			return 1;
 		}
 	}
 	else if (current_floor == 1){
-		if (queue[(((current_floor)*3)+QUEUE_COMMAND)] == 1){
+		if (queue[((current_floor*3)+QUEUE_COMMAND)] == 1){
 			return 1;
 		}
 		if (last_direction < 0){
-			if (queue[(((current_floor)*3)+QUEUE_CALL_DOWN)] == 1){
+			if (queue[((current_floor*3)+QUEUE_CALL_DOWN)] == 1){
 				return 1;
 			}
 		}
@@ -187,3 +187,5 @@ void queue_clear_all_orders(void){
 		queue[i] = 0;
 	}
 }
+
+//void queue_clear_all_lamps(void){}
