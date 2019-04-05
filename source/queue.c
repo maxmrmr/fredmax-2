@@ -189,6 +189,7 @@ void queue_clear_all_orders(void){
 	}
 }
 
+<<<<<<< HEAD
 void queue_clear_all_lamps(void){
 	int i;
 	for (i=0; i<=3; i++){
@@ -198,4 +199,6 @@ void queue_clear_all_lamps(void){
 	}
 }
 
+=======
+>>>>>>> ac3a4d6f24d1c04b747eaf39c97153ef29b9f06e
 //void queue_clear_all_lamps(void){}
