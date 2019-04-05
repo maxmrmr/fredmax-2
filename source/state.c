@@ -9,7 +9,7 @@ void state_init(void){
 }
 
 void state_arrived_at_any_floor(void){
-		current_state = IDLE;
+		current_state = IDLE; //
 }
 
 void state_arrived_at_correct_floor(void){

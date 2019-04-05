@@ -34,4 +34,4 @@ void state_set_last_direction(int direction);
 
 int state_get_last_floor(void);
 
-int state_set_last_floor(int current_floor);
+void state_set_last_floor(int current_floor);
