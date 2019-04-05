@@ -21,6 +21,7 @@ int main() {
     queue_clear_all_orders();
     queue_clear_all_lamps();
 
+
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
 
