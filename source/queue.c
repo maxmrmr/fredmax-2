@@ -1,5 +1,6 @@
 #include "queue.h"
 #include "elev.h"
+#include <stdio.h>
 
 int queue[12];
 
@@ -73,84 +74,86 @@ int queue_get_new_direction(int last_floor, int last_direction){
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 //Check if order in same direction or command in current floor
 	if (current_floor == 0){
-		if ((queue[((current_floor*3)+QUEUE_CALL_UP)]==1 || queue[(((current_floor)*3)+QUEUE_COMMAND)]==1)){
+		if (queue[(current_floor*3 + QUEUE_CALL_UP)] || queue[(((current_floor)*3)+QUEUE_COMMAND)]){
 			return 1;
 		}
 	}
 	else if (current_floor == 1){
-		if (queue[((current_floor*3)+QUEUE_COMMAND)] == 1){
+		if (queue[(current_floor*3 + QUEUE_COMMAND)]){
 			return 1;
 		}
 		if (last_direction < 0){
-			if (queue[((current_floor*3)+QUEUE_CALL_DOWN)] == 1){
+			if (queue[(current_floor*3 + QUEUE_CALL_DOWN)]){
 				return 1;
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[(((current_floor)*3)+QUEUE_CALL_UP)] == 1){
+			if (queue[(current_floor*3 + QUEUE_CALL_UP)]){
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 2){
-			if (queue[(((current_floor)*3)+QUEUE_COMMAND)] == 1){
+			if (queue[(current_floor*3 + QUEUE_COMMAND)]){
 				return 1;
+				printf("3. etasje HEI");
 			}
 		if (last_direction < 0){
-			if (queue[(((current_floor)*3)+QUEUE_CALL_DOWN)] == 1){
+			if (queue[(current_floor*3 + QUEUE_CALL_DOWN)]){
 				return 1;
+				printf("3. etasje ÅÅÅÅÅææÆÆÆÆ");
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[(((current_floor)*3)+QUEUE_CALL_UP)] == 1){
+			if (queue[(current_floor*3 + QUEUE_CALL_UP)]){
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 3){
-		if ((queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]==1 || queue[(((current_floor)*3)+QUEUE_COMMAND)]==1)){
+		if (queue[(current_floor*3 + QUEUE_CALL_DOWN)] || queue[(current_floor*3 + QUEUE_COMMAND)]){
 			return 1;
 		}
 	}
+
 //-------------------------------------------------------------------------------
 
 //No orders in same direction or command in current floor, check if stop anyway
 
 	if (last_direction < 0){
-		if (current_floor == 1){
-			if ((queue[(((current_floor)*3)+QUEUE_CALL_UP)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1)){
-				if (queue[(((current_floor)*3)+QUEUE_CALL_UP)]==1){
+		if (current_floor == 2){
+			if ( (queue[3]!=1) && (queue[0]!=1) ){
+				if (queue[6])
 					return 1;
-				}
 			}
 		}
 
-
-		else if (current_floor == 2){
-			if ((queue[(((current_floor)*3)+QUEUE_CALL_UP)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1)){
-				if (queue[(((current_floor)*3)+QUEUE_CALL_UP)]!=1 && queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1){
-					if (queue[(((current_floor)*3)+QUEUE_CALL_UP)]==1){
-						return 1;
-					}
-				}
+		if (current_floor == 1){
+			if (queue[0]!=1){
+				if (queue[3])
+					return 1;
 			}
 		}
 	}
 	if (last_direction > 0){
-		if (current_floor == 2){
-			if ((queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1)){
-				if (queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]==1){
-					return 1;
-				}
+		if (current_floor == 1){
+			if ( (queue[7]!=1) && (queue[10]!=1) ){
+				if ( (queue[8]!=1) && (queue[11]!=1) )
+					if (queue[4]){
+						return 1;
+						printf("2. etasje");
+					}
 			}
 		}
-		else if (current_floor == 1){
-			if ((queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1)){
-				if (queue[(((current_floor)*3)+QUEUE_CALL_UP)]!=1 && queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]!=1 && queue[(((current_floor)*3)+QUEUE_COMMAND)]!=1){
-					if (queue[(((current_floor)*3)+QUEUE_CALL_DOWN)]==1){
+
+		if (current_floor == 2){
+			if (queue[10]!=1){
+				if (queue[11]!=1){
+					if (queue[7]){
 						return 1;
+						printf("3. etasje");
 					}
 				}
 			}

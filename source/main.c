@@ -22,6 +22,8 @@ int main() {
     queue_clear_all_lamps();
 
 
+
+
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
 
@@ -42,11 +44,15 @@ int main() {
         }*/
 
         //Check if stop button is pressed, if pressed stop motor, clear queue and turn on stop light
+
+
         if (elev_get_stop_signal()){
             elev_set_motor_direction(DIRN_STOP);
+            printf("  TTTT\n");
             state_stop_button_pressed();
             queue_clear_all_orders();
             elev_set_stop_lamp(1);
+            queue_clear_all_lamps();
             if (elev_get_floor_sensor_signal() >= 0)
                 elev_set_door_open_lamp(1);
         }
@@ -104,10 +110,27 @@ int main() {
                 }
             }
 
-            if (elev_get_floor_sensor_signal() >= 0){
+            if (elev_get_floor_sensor_signal() != -1){
                 state_set_last_floor( elev_get_floor_sensor_signal());
+                //Det er noe galt med dette her. Den klarer å gå inn i if-en og likevel sette til -1.
+
+
+                //Kun for debugging
+                    printf("Value from elev_get_floor_sensor_signal: %d", elev_get_floor_sensor_signal());
+                if (state_get_last_floor() < 0)
+                    printf("  åå shit  ");
+
+
+
+
                 elev_set_floor_indicator( state_get_last_floor() );
+                if (elev_get_floor_sensor_signal() == 0 || elev_get_floor_sensor_signal() == 3){
+                    elev_set_motor_direction(DIRN_STOP);    //Safety measures. Avoiding running below 1st floor or above 4th
+                    printf("  WWWW\n");
+                }
                 if (queue_check_orders_at_current_floor( state_get_last_floor(), state_get_last_direction() )){
+                    printf("  ØØØØ\n");
+
                     elev_set_motor_direction(DIRN_STOP);
                     queue_clear_order( state_get_last_floor() );
                     int i;
