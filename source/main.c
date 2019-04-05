@@ -15,10 +15,11 @@ int main() {
 
     //printf("Press STOP button to stop elevator and exit program.\n");
 
-    /**Initialize elevator, if between floors drive down until any floor is reached
+    //Initialize elevator, if between floors drive down until any floor is reached
 
-    */
     state_init();
+    queue_clear_all_orders();
+    queue_clear_all_lamps();
 
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
