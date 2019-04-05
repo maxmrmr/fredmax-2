@@ -68,6 +68,8 @@ int queue_get_new_direction(int last_floor, int last_direction){
 	return 0;
 }
 
+int a = 0;
+
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 //Check if order in same direction or command in current floor
 	if (current_floor == 0){
