@@ -5,6 +5,18 @@
 
 #include <stdio.h>
 
+void clear_all_lamps(void){
+	int i;
+	for (i=0; i<=3; i++){
+		if (i != 3) {
+			elev_set_button_lamp(BUTTON_CALL_UP, i, 0);
+		}
+		if (i != 0) {
+			elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
+		}
+		elev_set_button_lamp(BUTTON_COMMAND, i, 0);
+	}
+}
 
 int main() {
     // Initialize hardware
@@ -19,10 +31,9 @@ int main() {
 
     state_init();
     queue_clear_all_orders();
-    queue_clear_all_lamps();
-
-
-
+	clear_all_lamps();
+	int current_floor; //variabel for å mellomlagre current floor i if setning med elev_get_floor_sensor()
+	int new_direction;  //variabel for å mellomlagre direction i if setning med queue_get_new_direction()
 
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
@@ -30,149 +41,140 @@ int main() {
     while(elev_get_floor_sensor_signal() < 0){}
     elev_set_motor_direction(DIRN_STOP);
     state_arrived_at_any_floor();
-    if (elev_get_floor_sensor_signal() >= 0){
-        state_set_last_floor(elev_get_floor_sensor_signal());
+    if (current_floor = elev_get_floor_sensor_signal() >= 0){
+        state_set_last_floor(current_floor);
     }
 
-    while (1) {
-        /**Stop when we reach top/bottom floor
-        if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-            elev_set_motor_direction(DIRN_STOP);
-        }
-        else if (elev_get_floor_sensor_signal() == 0) {
-            elev_set_motor_direction(DIRN_STOP);
-        }*/
+	while (1) {
+		/**Stop when we reach top/bottom floor
+		if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
+			elev_set_motor_direction(DIRN_STOP);
+		}
+		else if (elev_get_floor_sensor_signal() == 0) {
+			elev_set_motor_direction(DIRN_STOP);
+		}*/
 
-        //Check if stop button is pressed, if pressed stop motor, clear queue and turn on stop light
-
-
-        if (elev_get_stop_signal()){
-            elev_set_motor_direction(DIRN_STOP);
-            printf("  TTTT\n");
-            state_stop_button_pressed();
-            queue_clear_all_orders();
-            elev_set_stop_lamp(1);
-            queue_clear_all_lamps();
-            if (elev_get_floor_sensor_signal() >= 0)
-                elev_set_door_open_lamp(1);
-        }
-
-        if (!(elev_get_stop_signal())){
-            if (state_get_current_state() == EM_STOP){
-                elev_set_stop_lamp(0);
-                if (elev_get_floor_sensor_signal() >= 0){
-                    state_arrived_at_correct_floor();
-                    elev_set_door_open_lamp(1);
-                    timer_start();
-                }
-                else{
-                    state_stop_button_released();
-                }
-            }
-        }
-
-        //Only allowed to do stuff when not in emergency stop
-        if (state_get_current_state() != EM_STOP){
-
-            //Check timer, if time is out close door
-            if (timer_is_time_out()){
-                elev_set_door_open_lamp(0);
-                if (state_get_current_state() == DOOR_OPEN)
-                    state_timer_finished();
-                    //Check queue, if another order is in queue run in needed direction
-                    if(queue_get_new_direction( state_get_last_floor(), state_get_last_direction() )){
-                        state_set_last_direction(queue_get_new_direction( state_get_last_floor(), state_get_last_direction()));
-                        elev_set_motor_direction( state_get_last_direction() );
-                        state_motor_started();
-                    }
-            }
-
-            //For loop checking all button signals except stop
-            int i;
-            for (i = 0; i < N_FLOORS; ++i) {
-                if (i != 0){
-                    if (elev_get_button_signal(BUTTON_CALL_DOWN, i)){
-                        queue_add_order((3*i+1));                      //3*i for floor number, +1 for BUTTON_CALL_DOWN
-                        elev_set_button_lamp(BUTTON_CALL_DOWN, i, 1);
-                    }
-                }
+		//Check if stop button is pressed, if pressed stop motor, clear queue and turn on stop light
 
 
-                if (i != N_FLOORS - 1)
-                    if (elev_get_button_signal(BUTTON_CALL_UP, i)){
-                        queue_add_order((3*i));                       //3*i for floor number, +0 for BUTTON_CALL_UP
-                        elev_set_button_lamp(BUTTON_CALL_UP, i, 1);
-                    }
+		if (elev_get_stop_signal()) {
+			elev_set_motor_direction(DIRN_STOP);
+			state_stop_button_pressed();
+			queue_clear_all_orders();
+			elev_set_stop_lamp(1);
+			clear_all_lamps();
 
-                if (elev_get_button_signal(BUTTON_COMMAND, i)){
-                    queue_add_order((3*i)+2);                          //3*i for floor number, +2 for BUTTON_COMMAND
-                    elev_set_button_lamp(BUTTON_COMMAND, i, 1);
-                }
-            }
+			if (elev_get_floor_sensor_signal() >= 0)
+				elev_set_door_open_lamp(1);
+		}
 
-            if (elev_get_floor_sensor_signal() != -1){
-                state_set_last_floor( elev_get_floor_sensor_signal());
-                //Det er noe galt med dette her. Den klarer å gå inn i if-en og likevel sette til -1.
+		if (!(elev_get_stop_signal())) {
+			if (state_get_current_state() == EM_STOP) {
+				elev_set_stop_lamp(0);
+				if (elev_get_floor_sensor_signal() >= 0) {
+					state_arrived_at_correct_floor();
+					elev_set_door_open_lamp(1);
+					timer_start();
+				}
+				else {
+					state_stop_button_released();
+				}
+			}
+		}
+
+		//Only allowed to do stuff when not in emergency stop
+		if (state_get_current_state() != EM_STOP) {
+
+			//Check timer, if time is out close door
+			if (timer_is_time_out()) {
+				elev_set_door_open_lamp(0);
+				if (state_get_current_state() == DOOR_OPEN)
+					state_timer_finished();
+				//Check queue, if another order is in queue run in needed direction
+				if (new_direction = queue_get_new_direction(state_get_last_floor(), state_get_last_direction())) {
+					state_set_last_direction(new_direction);
+					elev_set_motor_direction(state_get_last_direction());
+					state_motor_started();
+				}
+			}
+
+			//For loop checking all button signals except stop
+			int i;
+			for (i = 0; i < N_FLOORS; ++i) {
+				if (i != 0) {
+					if (elev_get_button_signal(BUTTON_CALL_DOWN, i)) {
+						queue_add_order((3 * i + 1));                      //3*i for floor number, +1 for BUTTON_CALL_DOWN
+						elev_set_button_lamp(BUTTON_CALL_DOWN, i, 1);
+					}
+				}
 
 
-                //Kun for debugging
-                    printf("Value from elev_get_floor_sensor_signal: %d", elev_get_floor_sensor_signal());
-                if (state_get_last_floor() < 0)
-                    printf("  åå shit  ");
+				if (i != N_FLOORS - 1)
+					if (elev_get_button_signal(BUTTON_CALL_UP, i)) {
+						queue_add_order((3 * i));                       //3*i for floor number, +0 for BUTTON_CALL_UP
+						elev_set_button_lamp(BUTTON_CALL_UP, i, 1);
+					}
+
+				if (elev_get_button_signal(BUTTON_COMMAND, i)) {
+					queue_add_order((3 * i) + 2);                          //3*i for floor number, +2 for BUTTON_COMMAND
+					elev_set_button_lamp(BUTTON_COMMAND, i, 1);
+				}
+			}
+
+			if (current_floor = elev_get_floor_sensor_signal() != -1) {
+				state_set_last_floor(current_floor);
+				//Det er noe galt med dette her. Den klarer å gå inn i if-en og likevel sette til -1.
 
 
-
-
-                elev_set_floor_indicator( state_get_last_floor() );
-                if (elev_get_floor_sensor_signal() == 0 || elev_get_floor_sensor_signal() == 3){
-                    elev_set_motor_direction(DIRN_STOP);    //Safety measures. Avoiding running below 1st floor or above 4th
-                    printf("  WWWW\n");
-                }
-                if (queue_check_orders_at_current_floor( state_get_last_floor(), state_get_last_direction() )){
-                    printf("  ØØØØ\n");
-
-                    elev_set_motor_direction(DIRN_STOP);
-                    queue_clear_order( state_get_last_floor() );
-                    int i;
-                    for (i = 0; i < 3; ++i){
-                        if (state_get_last_floor() == 0){
-                            if (i != 1){
-                            elev_set_button_lamp(i, state_get_last_floor(), 0);
-                            }
-                        }
-                        else if (state_get_last_floor() == 3){
-                            if (i != 0){
-                            elev_set_button_lamp(i, state_get_last_floor(), 0);
-                            }
-                        }
-                        else{
-                            elev_set_button_lamp(i, state_get_last_floor(), 0);
-                        }
-                    }
-                    state_arrived_at_correct_floor();
-                    elev_set_door_open_lamp(1);
-                    timer_start();
-                }
-            }
-
-            if (state_get_current_state() == IDLE_BETWEEN_FLOORS){
-                if (queue_get_new_direction_if_between_floors((state_get_last_floor() ), state_get_last_direction())){
-                    state_set_last_direction(queue_get_new_direction_if_between_floors((state_get_last_floor() ), state_get_last_direction()));
-                    elev_set_motor_direction(state_get_last_direction());
-                    state_motor_started();
-                }
-            }
-        }
+				//Kun for debugging
+				printf("Value from elev_get_floor_sensor_signal: %d", elev_get_floor_sensor_signal());
+				if (state_get_last_floor() < 0)
+					printf("  åå shit  ");
 
 
 
 
-    }
+				elev_set_floor_indicator(state_get_last_floor());
+				if (elev_get_floor_sensor_signal() == 0 || elev_get_floor_sensor_signal() == 3) {
+					elev_set_motor_direction(DIRN_STOP);    //Safety measures. Avoiding running below 1st floor or above 4th
+					printf("  WWWW\n");
+				}
+				if (queue_check_orders_at_current_floor(state_get_last_floor(), state_get_last_direction())) {
+					printf("  ØØØØ\n");
 
-            //queue_check_orders_at_current_floor()
+					elev_set_motor_direction(DIRN_STOP);
+					queue_clear_order(state_get_last_floor());
+					int i;
+					for (i = 0; i < 3; ++i) {
+						if (state_get_last_floor() == 0) {
+							if (i != 1) {
+								elev_set_button_lamp(i, state_get_last_floor(), 0);
+							}
+						}
+						else if (state_get_last_floor() == 3) {
+							if (i != 0) {
+								elev_set_button_lamp(i, state_get_last_floor(), 0);
+							}
+						}
+						else {
+							elev_set_button_lamp(i, state_get_last_floor(), 0);
+						}
+					}
+					state_arrived_at_correct_floor();
+					elev_set_door_open_lamp(1);
+					timer_start();
+				}
+			}
 
-
-            //queue_get_new_direction(int last_floor, int direction)
+			if (state_get_current_state() == IDLE_BETWEEN_FLOORS) {
+				if (new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), state_get_last_direction())) {
+					state_set_last_direction(new_direction);
+					elev_set_motor_direction(state_get_last_direction());
+					state_motor_started();
+				}
+			}
+		}
+	}
 
     return 0;
 }

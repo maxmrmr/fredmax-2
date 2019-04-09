@@ -1,5 +1,4 @@
 #include "queue.h"
-#include "elev.h"
 #include <stdio.h>
 
 int queue[12];
@@ -192,7 +191,7 @@ void queue_clear_all_orders(void){
 	}
 }
 
-void queue_clear_all_lamps(void){
+/**void queue_clear_all_lamps(void){
 	int i;
 	for (i=0; i<=3; i++){
 		if (i != 3)
@@ -201,6 +200,4 @@ void queue_clear_all_lamps(void){
 			elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
 		elev_set_button_lamp(BUTTON_COMMAND, i, 0);
 	}
-}
-
-//void queue_clear_all_lamps(void){}
+}*/
