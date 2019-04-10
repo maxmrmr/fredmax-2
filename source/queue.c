@@ -1,5 +1,4 @@
 #include "queue.h"
-#include <stdio.h>
 
 int queue[12];
 

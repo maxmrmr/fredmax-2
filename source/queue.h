@@ -10,4 +10,3 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction);
 int queue_get_new_direction_if_between_floors(int last_floor, int last_direction);
 void queue_clear_order(int last_floor);
 void queue_clear_all_orders();
-//void queue_clear_all_lamps();
