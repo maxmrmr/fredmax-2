@@ -95,12 +95,10 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 	else if (current_floor == 2){
 			if (queue[(current_floor*3 + QUEUE_COMMAND)]){
 				return 1;
-				printf("3. etasje HEI");
 			}
 		if (last_direction < 0){
 			if (queue[(current_floor*3 + QUEUE_CALL_DOWN)]){
 				return 1;
-				printf("3. etasje ÅÅÅÅÅææÆÆÆÆ");
 			}
 		}
 
@@ -141,7 +139,6 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 				if ( (queue[8]!=1) && (queue[11]!=1) )
 					if (queue[4]){
 						return 1;
-						printf("2. etasje");
 					}
 			}
 		}
@@ -151,7 +148,6 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 				if (queue[11]!=1){
 					if (queue[7]){
 						return 1;
-						printf("3. etasje");
 					}
 				}
 			}
@@ -189,14 +185,3 @@ void queue_clear_all_orders(void){
 		queue[i] = 0;
 	}
 }
-
-/**void queue_clear_all_lamps(void){
-	int i;
-	for (i=0; i<=3; i++){
-		if (i != 3)
-			elev_set_button_lamp(BUTTON_CALL_UP, i, 0);
-		if (i != 0)
-			elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
-		elev_set_button_lamp(BUTTON_COMMAND, i, 0);
-	}
-}*/

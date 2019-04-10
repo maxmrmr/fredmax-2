@@ -53,8 +53,8 @@ int main() {
     state_init();
     queue_clear_all_orders();
 		clear_all_lamps();
-		int current_floor; //variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
-		int new_direction;  //variable used to temporarly hold new direction in if statement with queue_get_new_direction()
+		int current_floor = -1; //Variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
+		int new_direction = 0;  //Variable used to temporarly hold new direction in if statement with queue_get_new_direction()
 
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
@@ -62,7 +62,7 @@ int main() {
     while(elev_get_floor_sensor_signal() < 0){}
     elev_set_motor_direction(DIRN_STOP);
     state_arrived_at_any_floor();
-    if (current_floor = elev_get_floor_sensor_signal() >= 0){
+    if ((current_floor = elev_get_floor_sensor_signal()) != -1){
         state_set_last_floor(current_floor);
     }
 
@@ -84,20 +84,19 @@ int main() {
 			elev_set_stop_lamp(1);
 			clear_all_lamps();
 			//if elevator is in a floor when stop button is pressed, open door
-			if (elev_get_floor_sensor_signal() >= 0)
+			if (elev_get_floor_sensor_signal() >= 0){
 				elev_set_door_open_lamp(1);
+			}
 		}
 		//Check if stop button is released, if released and previous state was EM_STOP, handle starting after EM_STOP
 		if (!(elev_get_stop_signal())) {
 			if (state_get_current_state() == EM_STOP) {
 				elev_set_stop_lamp(0);
-				if (elev_get_floor_sensor_signal() >= 0) {
+				state_stop_button_released();
+				if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
 					state_arrived_at_correct_floor();
 					elev_set_door_open_lamp(1);
 					timer_start();
-				}
-				else {
-					state_stop_button_released();
 				}
 			}
 		}
@@ -107,11 +106,15 @@ int main() {
 
 			//Check timer, if the time is out and the door is open close door
 			if (timer_is_time_out()) {
-				if (state_get_current_state() == DOOR_OPEN)
+				if (state_get_current_state() == DOOR_OPEN){
 					elev_set_door_open_lamp(0);
 					state_timer_finished();
-				//Check queue, if another order is in queue run in needed direction
-				if (new_direction = queue_get_new_direction(state_get_last_floor(), state_get_last_direction())) {
+				}
+			}
+
+			//If door is not open, check queue, if another order is in queue run in needed direction
+			if (state_get_current_state() != DOOR_OPEN){
+				if ((new_direction = queue_get_new_direction(state_get_last_floor(), state_get_last_direction()))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
 					state_motor_started();
@@ -129,11 +132,12 @@ int main() {
 				}
 
 
-				if (i != N_FLOORS - 1)
+				if (i != N_FLOORS - 1){
 					if (elev_get_button_signal(BUTTON_CALL_UP, i)) {
 						queue_add_order((3 * i));                       //3*i for floor number, +0 for BUTTON_CALL_UP
 						elev_set_button_lamp(BUTTON_CALL_UP, i, 1);
 					}
+				}
 
 				if (elev_get_button_signal(BUTTON_COMMAND, i)) {
 					queue_add_order((3 * i) + 2);                          //3*i for floor number, +2 for BUTTON_COMMAND
@@ -141,22 +145,13 @@ int main() {
 				}
 			}
 
-			if (current_floor = elev_get_floor_sensor_signal() != -1) {
+			//When arriving or passing a floor set last floor and set floor indicator light
+			if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
 				state_set_last_floor(current_floor);
 				elev_set_floor_indicator(state_get_last_floor());
 				//Det er noe galt med dette her. Den klarer å gå inn i if-en og likevel sette til -1.
 				//Prøver å teste med holdevariabel som tilordnes i if sjekken, så slipper vi å bruke elev_get_floor_sensor_signal to ganger
-
-
-				//Kun for debugging
-				printf("Value from elev_get_floor_sensor_signal: %d", elev_get_floor_sensor_signal());
-				if (state_get_last_floor() < 0)
-					printf("  åå shit  ");
-
-
-				if (elev_get_floor_sensor_signal() == 0 || elev_get_floor_sensor_signal() == 3) {
-					elev_set_motor_direction(DIRN_STOP);    //Safety measures. Avoiding running below 1st floor or above 4th
-				}																					//Mulig denne ødelegger kjøring videre fra 1. eller 4. etg. ved å stoppe motoren når den skal snu
+				//Det funket, ingen bugs her lengre
 
 				//Check if elevator should stop when arriving at any floor, if stop clear orders and turn off lamps in floor and open door
 				if (queue_check_orders_at_current_floor(state_get_last_floor(), state_get_last_direction())) {
@@ -169,9 +164,9 @@ int main() {
 				}
 			}
 
-			//Check if state is IDLE_BETWEEN_FLOORS if it is, check orders and get correct new direction even if not in a floor
+			//Check if state is IDLE_BETWEEN_FLOORS if it is, check orders and get correct new direction when between floors
 			if (state_get_current_state() == IDLE_BETWEEN_FLOORS) {
-				if (new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), state_get_last_direction())) {
+				if ((new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), state_get_last_direction()))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
 					state_motor_started();
