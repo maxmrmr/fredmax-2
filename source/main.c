@@ -112,8 +112,8 @@ int main() {
 				}
 			}
 
-			//If door is not open, check queue, if another order is in queue run in needed direction
-			if (state_get_current_state() != DOOR_OPEN){
+			//If elevator is idle, check queue, if another order is in queue run in needed direction
+			if (state_get_current_state() == IDLE ){
 				if ((new_direction = queue_get_new_direction(state_get_last_floor(), state_get_last_direction()))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());

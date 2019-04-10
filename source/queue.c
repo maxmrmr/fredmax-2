@@ -149,7 +149,7 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 		}
 
 		if (current_floor == 2){
-			if ( (!queue[9]) &&	(!queue[10]) && (!queue[11]) ){ 	//Check if no orders in 4th floor
+			if ( (!queue[9]) &&	(!queue[10]) && (!queue[11])){ 	//Check if no orders in 4th floor
 				if (queue[7]){									//Check if order in 3rd floor, not in same direction or command
 					return 1;
 				}
