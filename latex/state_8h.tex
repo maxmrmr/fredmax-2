@@ -1,0 +1,145 @@
+\hypertarget{state_8h}{}\section{source/state.h File Reference}
+\label{state_8h}\index{source/state.\+h@{source/state.\+h}}
+
+
+A simple state machine for controlling the state of the elevator and keeping track of the last floor visited and the last direction used.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \hyperlink{state_8h_af5ec00a0a477f788bc1fb5cc2e6d19a9}{tag\+\_\+state\+\_\+state\+\_\+type} \hyperlink{state_8h_a82e2a99ff713073fec1daf589773f4ee}{state\+\_\+state\+\_\+type\+\_\+t}\hypertarget{state_8h_a82e2a99ff713073fec1daf589773f4ee}{}\label{state_8h_a82e2a99ff713073fec1daf589773f4ee}
+
+\begin{DoxyCompactList}\small\item\em States for checking which state elevator is in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{state_8h_af5ec00a0a477f788bc1fb5cc2e6d19a9}{tag\+\_\+state\+\_\+state\+\_\+type} \{ \\*
+{\bfseries I\+N\+I\+T\+I\+A\+L\+I\+ZE} = 0, 
+{\bfseries I\+D\+LE} = 1, 
+{\bfseries R\+U\+N\+N\+I\+NG} = 2, 
+{\bfseries D\+O\+O\+R\+\_\+\+O\+P\+EN} = 3, 
+\\*
+{\bfseries E\+M\+\_\+\+S\+T\+OP} = 4, 
+{\bfseries I\+D\+L\+E\+\_\+\+B\+E\+T\+W\+E\+E\+N\+\_\+\+F\+L\+O\+O\+RS} = 5
+ \}\hypertarget{state_8h_af5ec00a0a477f788bc1fb5cc2e6d19a9}{}\label{state_8h_af5ec00a0a477f788bc1fb5cc2e6d19a9}
+\begin{DoxyCompactList}\small\item\em States for checking which state elevator is in. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{state_8h_a5e1c04e1bffdfacfecc570831b6b0fb0}{state\+\_\+init} (void)\hypertarget{state_8h_a5e1c04e1bffdfacfecc570831b6b0fb0}{}\label{state_8h_a5e1c04e1bffdfacfecc570831b6b0fb0}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to I\+N\+I\+T\+I\+A\+L\+I\+ZE, used upon start of program. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_ac42260fad8db90b798c1f87cc484d864}{state\+\_\+arrived\+\_\+at\+\_\+any\+\_\+floor} (void)\hypertarget{state_8h_ac42260fad8db90b798c1f87cc484d864}{}\label{state_8h_ac42260fad8db90b798c1f87cc484d864}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to I\+D\+LE, used upon arriving at any floor after initializing. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a9fbbceab4351e22b0e6f66a5a5b26b80}{state\+\_\+door\+\_\+opened} (void)\hypertarget{state_8h_a9fbbceab4351e22b0e6f66a5a5b26b80}{}\label{state_8h_a9fbbceab4351e22b0e6f66a5a5b26b80}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to D\+O\+O\+R\+\_\+\+O\+P\+EN, used upon opening doors in a floor where elevator has an order or is stopped with the stop button. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a22f92ef31de64dfd9568bdf597421394}{state\+\_\+timer\+\_\+finished} (void)\hypertarget{state_8h_a22f92ef31de64dfd9568bdf597421394}{}\label{state_8h_a22f92ef31de64dfd9568bdf597421394}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to I\+D\+LE, used upon closing doors in a floor where elevator had stopped, when 3 second timer is finished. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a21f74a48f0b26b59c910a1dc4d232ec4}{state\+\_\+motor\+\_\+started} (void)\hypertarget{state_8h_a21f74a48f0b26b59c910a1dc4d232ec4}{}\label{state_8h_a21f74a48f0b26b59c910a1dc4d232ec4}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to R\+U\+N\+N\+I\+NG, used upon starting elevator motor, when elevator starts running. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a838dc3eba0ed588978d9360c87a1ed36}{state\+\_\+stop\+\_\+button\+\_\+pressed} (void)\hypertarget{state_8h_a838dc3eba0ed588978d9360c87a1ed36}{}\label{state_8h_a838dc3eba0ed588978d9360c87a1ed36}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to E\+M\+\_\+\+S\+T\+OP, used when stop button is pressed. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a68d82698441e82d9e8fe701e54f410ae}{state\+\_\+stop\+\_\+button\+\_\+released} (void)\hypertarget{state_8h_a68d82698441e82d9e8fe701e54f410ae}{}\label{state_8h_a68d82698441e82d9e8fe701e54f410ae}
+
+\begin{DoxyCompactList}\small\item\em Sets the state to I\+D\+L\+E\+\_\+\+B\+E\+T\+W\+E\+E\+N\+\_\+\+F\+L\+O\+O\+RS, used when stop button is released when elevator is between floors. \end{DoxyCompactList}\item 
+\hyperlink{state_8h_a82e2a99ff713073fec1daf589773f4ee}{state\+\_\+state\+\_\+type\+\_\+t} \hyperlink{state_8h_a2313517f5fcb65f76484d859ac46054d}{state\+\_\+get\+\_\+current\+\_\+state} (void)
+\begin{DoxyCompactList}\small\item\em Get current state of elevator. \end{DoxyCompactList}\item 
+int \hyperlink{state_8h_a317af49738c83dabfcde42aee93b6b93}{state\+\_\+get\+\_\+last\+\_\+direction} (void)
+\begin{DoxyCompactList}\small\item\em Get the last direction the elevator was running. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a35cda0255a2ec19fe780b71f66cbf04b}{state\+\_\+set\+\_\+last\+\_\+direction} (int direction)
+\begin{DoxyCompactList}\small\item\em Set the last direction the elevator was running. \end{DoxyCompactList}\item 
+int \hyperlink{state_8h_a93e4b49731ea0ab6cbddba3661e3ece9}{state\+\_\+get\+\_\+last\+\_\+floor} (void)
+\begin{DoxyCompactList}\small\item\em Get the last floor the elevator was in or passed. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a32ffc2126a693223b02a00fbfb0cfde4}{state\+\_\+set\+\_\+last\+\_\+floor} (int current\+\_\+floor)
+\begin{DoxyCompactList}\small\item\em Set the last floor the elevator was in or passed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A simple state machine for controlling the state of the elevator and keeping track of the last floor visited and the last direction used. 
+
+
+
+\subsection{Function Documentation}
+\index{state.\+h@{state.\+h}!state\+\_\+get\+\_\+current\+\_\+state@{state\+\_\+get\+\_\+current\+\_\+state}}
+\index{state\+\_\+get\+\_\+current\+\_\+state@{state\+\_\+get\+\_\+current\+\_\+state}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+get\+\_\+current\+\_\+state(void)}{state_get_current_state(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf state\+\_\+state\+\_\+type\+\_\+t} state\+\_\+get\+\_\+current\+\_\+state (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_a2313517f5fcb65f76484d859ac46054d}{}\label{state_8h_a2313517f5fcb65f76484d859ac46054d}
+
+
+Get current state of elevator. 
+
+\begin{DoxyReturn}{Returns}
+The current state of the elevator in datatype state\+\_\+state\+\_\+type\+\_\+t. 
+\end{DoxyReturn}
+\index{state.\+h@{state.\+h}!state\+\_\+get\+\_\+last\+\_\+direction@{state\+\_\+get\+\_\+last\+\_\+direction}}
+\index{state\+\_\+get\+\_\+last\+\_\+direction@{state\+\_\+get\+\_\+last\+\_\+direction}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+get\+\_\+last\+\_\+direction(void)}{state_get_last_direction(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int state\+\_\+get\+\_\+last\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_a317af49738c83dabfcde42aee93b6b93}{}\label{state_8h_a317af49738c83dabfcde42aee93b6b93}
+
+
+Get the last direction the elevator was running. 
+
+\begin{DoxyReturn}{Returns}
+-\/1 if the last direction was down, 1 if the last direction was up. 
+\end{DoxyReturn}
+\index{state.\+h@{state.\+h}!state\+\_\+get\+\_\+last\+\_\+floor@{state\+\_\+get\+\_\+last\+\_\+floor}}
+\index{state\+\_\+get\+\_\+last\+\_\+floor@{state\+\_\+get\+\_\+last\+\_\+floor}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+get\+\_\+last\+\_\+floor(void)}{state_get_last_floor(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int state\+\_\+get\+\_\+last\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_a93e4b49731ea0ab6cbddba3661e3ece9}{}\label{state_8h_a93e4b49731ea0ab6cbddba3661e3ece9}
+
+
+Get the last floor the elevator was in or passed. 
+
+\begin{DoxyReturn}{Returns}
+0-\/3, 0 is bottom floor 3 is top floor. 
+\end{DoxyReturn}
+\index{state.\+h@{state.\+h}!state\+\_\+set\+\_\+last\+\_\+direction@{state\+\_\+set\+\_\+last\+\_\+direction}}
+\index{state\+\_\+set\+\_\+last\+\_\+direction@{state\+\_\+set\+\_\+last\+\_\+direction}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+set\+\_\+last\+\_\+direction(int direction)}{state_set_last_direction(int direction)}}]{\setlength{\rightskip}{0pt plus 5cm}void state\+\_\+set\+\_\+last\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{int}]{direction}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_a35cda0255a2ec19fe780b71f66cbf04b}{}\label{state_8h_a35cda0255a2ec19fe780b71f66cbf04b}
+
+
+Set the last direction the elevator was running. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em direction} & Which direction the elevator is starting to run. \\
+\hline
+\end{DoxyParams}
+\index{state.\+h@{state.\+h}!state\+\_\+set\+\_\+last\+\_\+floor@{state\+\_\+set\+\_\+last\+\_\+floor}}
+\index{state\+\_\+set\+\_\+last\+\_\+floor@{state\+\_\+set\+\_\+last\+\_\+floor}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+set\+\_\+last\+\_\+floor(int current\+\_\+floor)}{state_set_last_floor(int current_floor)}}]{\setlength{\rightskip}{0pt plus 5cm}void state\+\_\+set\+\_\+last\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{int}]{current\+\_\+floor}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_a32ffc2126a693223b02a00fbfb0cfde4}{}\label{state_8h_a32ffc2126a693223b02a00fbfb0cfde4}
+
+
+Set the last floor the elevator was in or passed. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em current\+\_\+floor} & Which floor the elevator is currently in. \\
+\hline
+\end{DoxyParams}

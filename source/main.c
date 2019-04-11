@@ -1,3 +1,8 @@
+/**
+* @file
+* @brief Main control of elevator system for use at the real time lab NTNU
+*/
+
 #include "elev.h"
 #include "queue.h"
 #include "timer.h"
@@ -5,7 +10,9 @@
 
 #include <stdio.h>
 
-//Clear all lamps, used when initializing and when stop button is pressed
+/**
+* @brief Clear all lamps, used when initializing and when stop button is pressed
+*/
 void clear_all_lamps(void){
 	int i;
 	for (i=0; i<=3; i++){
@@ -19,7 +26,9 @@ void clear_all_lamps(void){
 	}
 }
 
-//clear lamps in current floor, used when reaching a floor and picking up users
+/**
+* @brief Clear lamps in current floor, used when reaching a floor and picking up users
+*/
 void clear_lamps_in_current_floor(void){
 	int i;
 	for (i = 0; i < 3; ++i) {
@@ -39,6 +48,11 @@ void clear_lamps_in_current_floor(void){
 	}
 }
 
+/**
+* @brief Main control system controlling elevator.
+*
+* @return 1 if unable to initialize elevator hardware, 0 if finished running
+*/
 int main() {
     // Initialize hardware
 		if (!elev_init()) {
@@ -67,14 +81,6 @@ int main() {
     }
 
 	while (1) {
-		/**Stop when we reach top/bottom floor
-		if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-			elev_set_motor_direction(DIRN_STOP);
-		}
-		else if (elev_get_floor_sensor_signal() == 0) {
-			elev_set_motor_direction(DIRN_STOP);
-		}*/
-
 
 		//Check if stop button is pressed, if pressed stop motor, clear queue, turn on stop light and clear all lamps
 		if (elev_get_stop_signal()) {
@@ -83,19 +89,21 @@ int main() {
 			queue_clear_all_orders();
 			elev_set_stop_lamp(1);
 			clear_all_lamps();
+
 			//if elevator is in a floor when stop button is pressed, open door
 			if (elev_get_floor_sensor_signal() >= 0){
 				elev_set_door_open_lamp(1);
 			}
 		}
+
 		//Check if stop button is released, if released and previous state was EM_STOP, handle starting after EM_STOP
 		if (!(elev_get_stop_signal())) {
 			if (state_get_current_state() == EM_STOP) {
 				elev_set_stop_lamp(0);
 				state_stop_button_released();
 				if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
-					state_arrived_at_correct_floor();
 					elev_set_door_open_lamp(1);
+					state_door_opened();
 					timer_start();
 				}
 			}
@@ -104,7 +112,7 @@ int main() {
 		//Only allowed to do stuff when not in emergency stop
 		if (state_get_current_state() != EM_STOP) {
 
-			//Check timer, if the time is out and the door is open close door
+			//Check timer, if the time is out and the door is open close the door
 			if (timer_is_time_out()) {
 				if (state_get_current_state() == DOOR_OPEN){
 					elev_set_door_open_lamp(0);
@@ -154,10 +162,10 @@ int main() {
 				//Check if elevator should stop when arriving at any floor, if stop clear orders and turn off lamps in floor and open door
 				if (queue_check_orders_at_current_floor(state_get_last_floor(), state_get_last_direction())) {
 					elev_set_motor_direction(DIRN_STOP);
-					queue_clear_order(state_get_last_floor());
+					queue_clear_orders_in_floor(state_get_last_floor());
 					clear_lamps_in_current_floor();
-					state_arrived_at_correct_floor();
 					elev_set_door_open_lamp(1);
+					state_door_opened();
 					timer_start();
 				}
 			}

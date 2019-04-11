@@ -1,0 +1,47 @@
+\hypertarget{main_8c}{}\section{source/main.c File Reference}
+\label{main_8c}\index{source/main.\+c@{source/main.\+c}}
+
+
+Main control of elevator system for use at the real time lab N\+T\+NU.  
+
+
+{\ttfamily \#include \char`\"{}elev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}queue.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+Include dependency graph for main.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{main_8c_a5fd77e622818043099d8cf3b9b4e2065}{clear\+\_\+all\+\_\+lamps} (void)\hypertarget{main_8c_a5fd77e622818043099d8cf3b9b4e2065}{}\label{main_8c_a5fd77e622818043099d8cf3b9b4e2065}
+
+\begin{DoxyCompactList}\small\item\em Clear all lamps, used when initializing and when stop button is pressed. \end{DoxyCompactList}\item 
+void \hyperlink{main_8c_a37d70c4967fcaa1491c1ab2d6105e303}{clear\+\_\+lamps\+\_\+in\+\_\+current\+\_\+floor} (void)\hypertarget{main_8c_a37d70c4967fcaa1491c1ab2d6105e303}{}\label{main_8c_a37d70c4967fcaa1491c1ab2d6105e303}
+
+\begin{DoxyCompactList}\small\item\em Clear lamps in current floor, used when reaching a floor and picking up users. \end{DoxyCompactList}\item 
+int \hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\begin{DoxyCompactList}\small\item\em Main control system controlling elevator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main control of elevator system for use at the real time lab N\+T\+NU. 
+
+
+
+\subsection{Function Documentation}
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Main control system controlling elevator. 
+
+\begin{DoxyReturn}{Returns}
+1 if unable to initialize elevator hardware, 0 if finished running 
+\end{DoxyReturn}

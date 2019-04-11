@@ -1,0 +1,131 @@
+\hypertarget{queue_8h}{}\section{source/queue.h File Reference}
+\label{queue_8h}\index{source/queue.\+h@{source/queue.\+h}}
+
+
+An elevator queue and functions deciding which order in queue is the next to be excecuted.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{queue_8h_a811bf4e93dd26735bea1cefa5bca4c02}{queue\+\_\+add\+\_\+order} (int order)
+\begin{DoxyCompactList}\small\item\em Add an order to queue. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a6b9b2ad5801c12e0596d50745c476185}{queue\+\_\+get\+\_\+new\+\_\+direction} (int last\+\_\+floor, int last\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Get new direction for elevator to excecute next order. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors} (int last\+\_\+floor, int last\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Get new direction for elevator to excecute next order, if elevator is between floors. \end{DoxyCompactList}\item 
+int \hyperlink{queue_8h_a999706a53bfc6fbdaee0d4a1565f9638}{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor} (int current\+\_\+floor, int last\+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Check if elevator should stop when arriving at a floor. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_ae4d32e90e17badd59dc534708ba324dc}{queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor} (int floor)
+\begin{DoxyCompactList}\small\item\em Clear orders in a floor from queue, used after picking up all users in a floor. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_aa159e10884ecc2a96bc157a9a6ddac38}{queue\+\_\+clear\+\_\+all\+\_\+orders} (void)\hypertarget{queue_8h_aa159e10884ecc2a96bc157a9a6ddac38}{}\label{queue_8h_aa159e10884ecc2a96bc157a9a6ddac38}
+
+\begin{DoxyCompactList}\small\item\em Clear all orders from queue, used after stop button is pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An elevator queue and functions deciding which order in queue is the next to be excecuted. 
+
+
+
+\subsection{Function Documentation}
+\index{queue.\+h@{queue.\+h}!queue\+\_\+add\+\_\+order@{queue\+\_\+add\+\_\+order}}
+\index{queue\+\_\+add\+\_\+order@{queue\+\_\+add\+\_\+order}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{queue\+\_\+add\+\_\+order(int order)}{queue_add_order(int order)}}]{\setlength{\rightskip}{0pt plus 5cm}void queue\+\_\+add\+\_\+order (
+\begin{DoxyParamCaption}
+\item[{int}]{order}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a811bf4e93dd26735bea1cefa5bca4c02}{}\label{queue_8h_a811bf4e93dd26735bea1cefa5bca4c02}
+
+
+Add an order to queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em order} & Number from 0-\/11 deciding which order to add. \\
+\hline
+\end{DoxyParams}
+\index{queue.\+h@{queue.\+h}!queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor@{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor}}
+\index{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor@{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor(int current\+\_\+floor, int last\+\_\+direction)}{queue_check_orders_at_current_floor(int current_floor, int last_direction)}}]{\setlength{\rightskip}{0pt plus 5cm}int queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{int}]{current\+\_\+floor, }
+\item[{int}]{last\+\_\+direction}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a999706a53bfc6fbdaee0d4a1565f9638}{}\label{queue_8h_a999706a53bfc6fbdaee0d4a1565f9638}
+
+
+Check if elevator should stop when arriving at a floor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em current\+\_\+floor} & Floor arrived at. \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+direction} & Last direction traveled.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if elevator should stop, 0 if elevator should keep running. 
+\end{DoxyReturn}
+\index{queue.\+h@{queue.\+h}!queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor@{queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor}}
+\index{queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor@{queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor(int floor)}{queue_clear_orders_in_floor(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}void queue\+\_\+clear\+\_\+orders\+\_\+in\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{int}]{floor}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_ae4d32e90e17badd59dc534708ba324dc}{}\label{queue_8h_ae4d32e90e17badd59dc534708ba324dc}
+
+
+Clear orders in a floor from queue, used after picking up all users in a floor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em floor} & Floor to clear orders from. \\
+\hline
+\end{DoxyParams}
+\index{queue.\+h@{queue.\+h}!queue\+\_\+get\+\_\+new\+\_\+direction@{queue\+\_\+get\+\_\+new\+\_\+direction}}
+\index{queue\+\_\+get\+\_\+new\+\_\+direction@{queue\+\_\+get\+\_\+new\+\_\+direction}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{queue\+\_\+get\+\_\+new\+\_\+direction(int last\+\_\+floor, int last\+\_\+direction)}{queue_get_new_direction(int last_floor, int last_direction)}}]{\setlength{\rightskip}{0pt plus 5cm}int queue\+\_\+get\+\_\+new\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{int}]{last\+\_\+floor, }
+\item[{int}]{last\+\_\+direction}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a6b9b2ad5801c12e0596d50745c476185}{}\label{queue_8h_a6b9b2ad5801c12e0596d50745c476185}
+
+
+Get new direction for elevator to excecute next order. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em last\+\_\+floor} & Last floor visited or current floor if in a floor. \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+direction} & Last direction traveled.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if elevator is to stay idle, 1 if elevator is to run up, -\/1 if elevator is to run down. 
+\end{DoxyReturn}
+\index{queue.\+h@{queue.\+h}!queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors@{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors}}
+\index{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors@{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors}!queue.\+h@{queue.\+h}}
+\subsubsection[{\texorpdfstring{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors(int last\+\_\+floor, int last\+\_\+direction)}{queue_get_new_direction_if_between_floors(int last_floor, int last_direction)}}]{\setlength{\rightskip}{0pt plus 5cm}int queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors (
+\begin{DoxyParamCaption}
+\item[{int}]{last\+\_\+floor, }
+\item[{int}]{last\+\_\+direction}
+\end{DoxyParamCaption}
+)}\hypertarget{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}{}\label{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}
+
+
+Get new direction for elevator to excecute next order, if elevator is between floors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em last\+\_\+floor} & Last floor visited \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+direction,Last} & direction traveled.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if elevator is to stay idle, 1 if elevator is to run up, -\/1 if elevator is to run down. 
+\end{DoxyReturn}
