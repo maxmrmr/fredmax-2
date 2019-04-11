@@ -51,13 +51,13 @@ int queue_get_new_direction(int last_floor, int last_direction){
 			}
 		}
 		else if (last_direction > 0){
-			if (queue[i]){
-				if (i > ((last_floor)*3+2)){ //calculate number for order over last floor
+			if (queue[11-i]){ 				//Using 11-i to prioritize running up, because direction is up already
+				if ((11-i) > ((last_floor)*3+2)){ //calculate number for order over last floor
 					if (last_floor != 3){  //Not allowed to run up if at top floor
 						return 1;
 					}
 				}
-				else if (i < (last_floor)*3){ //calculate number for order under last floor
+				else if ((11-i) < (last_floor)*3){ //calculate number for order under last floor
 					if (last_floor != 0){  //Not allowed to run down if at first floor
 						return -1;
 					}

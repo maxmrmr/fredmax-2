@@ -149,9 +149,7 @@ int main() {
 			if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
 				state_set_last_floor(current_floor);
 				elev_set_floor_indicator(state_get_last_floor());
-				//Det er noe galt med dette her. Den klarer å gå inn i if-en og likevel sette til -1.
-				//Prøver å teste med holdevariabel som tilordnes i if sjekken, så slipper vi å bruke elev_get_floor_sensor_signal to ganger
-				//Det funket, ingen bugs her lengre
+
 
 				//Check if elevator should stop when arriving at any floor, if stop clear orders and turn off lamps in floor and open door
 				if (queue_check_orders_at_current_floor(state_get_last_floor(), state_get_last_direction())) {
