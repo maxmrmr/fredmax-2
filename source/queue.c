@@ -72,44 +72,44 @@ int queue_get_new_direction(int last_floor, int last_direction){
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 //Check if order in same direction or command in current floor
 	if (current_floor == 0){
-		if (queue[0] || queue[2]){ 	//stop in bottom floor no matter what
+		if (queue[0] || queue[2]){ 	//Stop in bottom floor no matter what
 			return 1;
 		}
 	}
 	else if (current_floor == 1){
-		if (queue[5]){ 				//check 2nd floor COMMAND
+		if (queue[5]){ 				//Check 2nd floor COMMAND
 			return 1;
 		}
 		if (last_direction < 0){
-			if (queue[4]){			//check 2nd floor CALL_DOWN, if going down
+			if (queue[4]){			//Check 2nd floor CALL_DOWN, if going down
 				return 1;
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[3]){			//check 2nd floor CALL_UP, if going up
+			if (queue[3]){			//Check 2nd floor CALL_UP, if going up
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 2){
-			if (queue[8]){			//check 3rd floor COMMAND
+			if (queue[8]){			//Check 3rd floor COMMAND
 				return 1;
 			}
 		if (last_direction < 0){
-			if (queue[7]){			//check 3rd floor CALL_DOWN, if going down
+			if (queue[7]){			//Check 3rd floor CALL_DOWN, if going down
 				return 1;
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[6]){			//check 3rd floor CALL_UP, if going up
+			if (queue[6]){			//Check 3rd floor CALL_UP, if going up
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 3){
-		if (queue[(current_floor*3 + 1)] || queue[(current_floor*3 + 2)]){	//stop in top floor no matter what
+		if (queue[10] || queue[11]){	//Stop in top floor no matter what
 			return 1;
 		}
 	}
