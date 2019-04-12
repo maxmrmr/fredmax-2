@@ -69,10 +69,10 @@ int main() {
 		clear_all_lamps();
 		int current_floor = -1; //Variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
 		int new_direction = 0;  //Variable used to temporarly hold new direction in if statement with queue_get_new_direction()
-		int elevator_above_last_floor = 0; //Variable used to check if elevator is above or below last known floor. 1 for above, 0 for below.
 
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
+
 
     while(elev_get_floor_sensor_signal() < 0){}
     elev_set_motor_direction(DIRN_STOP);
@@ -127,10 +127,10 @@ int main() {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
 					if (state_get_last_direction() > 0){
-						elevator_above_last_floor = 1;
+						state_set_elevator_above_last_floor();
 					}
 					else{
-						elevator_above_last_floor = 0;
+						state_clear_elevator_above_last_floor();
 					}
 					state_motor_started();
 				}
@@ -179,7 +179,7 @@ int main() {
 
 			//Check if state is IDLE_BETWEEN_FLOORS if it is, check orders and get correct new direction when between floors
 			if (state_get_current_state() == IDLE_BETWEEN_FLOORS) {
-				if ((new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), elevator_above_last_floor))) {
+				if ((new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), state_get_elevator_above_last_floor()))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
 					state_motor_started();

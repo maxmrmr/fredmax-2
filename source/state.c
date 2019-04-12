@@ -3,6 +3,7 @@
 state_state_type_t current_state;
 int last_direction;
 int last_floor;
+int elevator_above_last_floor;
 
 void state_init(void){
 	current_state = INITIALIZE;
@@ -52,4 +53,17 @@ int state_get_last_floor(void){
 
 void state_set_last_floor(int current_floor){
 	last_floor = current_floor;
+}
+
+void state_set_elevator_above_last_floor(void){
+	elevator_above_last_floor = 1;
+}
+
+void state_clear_elevator_above_last_floor(void){
+	elevator_above_last_floor = 0;
+}
+
+
+int state_get_elevator_above_last_floor(void){
+	return elevator_above_last_floor;
 }

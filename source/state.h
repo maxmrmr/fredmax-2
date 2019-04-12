@@ -88,3 +88,20 @@ int state_get_last_floor(void);
 * @param [in] current_floor Which floor the elevator is currently in.
 */
 void state_set_last_floor(int current_floor);
+
+/**
+* @brief Set elevator_above_last_floor.
+*/
+void state_set_elevator_above_last_floor(void);
+
+/**
+* @brief Clear elevator_above_last_floor.
+*/
+void state_clear_elevator_above_last_floor(void);
+
+/**
+* @brief Get elevator_above_last_floor.
+*
+* @return 0 if elevator below last floor passed, 1 if elevator above last floor passed.
+*/
+int state_get_elevator_above_last_floor(void);

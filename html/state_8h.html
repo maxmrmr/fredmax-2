@@ -170,6 +170,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stat
 <tr class="memitem:a32ffc2126a693223b02a00fbfb0cfde4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state_8h.html#a32ffc2126a693223b02a00fbfb0cfde4">state_set_last_floor</a> (int current_floor)</td></tr>
 <tr class="memdesc:a32ffc2126a693223b02a00fbfb0cfde4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the last floor the elevator was in or passed.  <a href="#a32ffc2126a693223b02a00fbfb0cfde4">More...</a><br /></td></tr>
 <tr class="separator:a32ffc2126a693223b02a00fbfb0cfde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5819a107206efcb8e8480dbf939772c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5819a107206efcb8e8480dbf939772c6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state_8h.html#a5819a107206efcb8e8480dbf939772c6">state_set_elevator_above_last_floor</a> (void)</td></tr>
+<tr class="memdesc:a5819a107206efcb8e8480dbf939772c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set elevator_above_last_floor. <br /></td></tr>
+<tr class="separator:a5819a107206efcb8e8480dbf939772c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cbd42bc8385f2df72702a230a2c3732"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2cbd42bc8385f2df72702a230a2c3732"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state_8h.html#a2cbd42bc8385f2df72702a230a2c3732">state_clear_elevator_above_last_floor</a> (void)</td></tr>
+<tr class="memdesc:a2cbd42bc8385f2df72702a230a2c3732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear elevator_above_last_floor. <br /></td></tr>
+<tr class="separator:a2cbd42bc8385f2df72702a230a2c3732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32dafd54a0c2f3222d2f8b0a505cfbd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state_8h.html#ad32dafd54a0c2f3222d2f8b0a505cfbd">state_get_elevator_above_last_floor</a> (void)</td></tr>
+<tr class="memdesc:ad32dafd54a0c2f3222d2f8b0a505cfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get elevator_above_last_floor.  <a href="#ad32dafd54a0c2f3222d2f8b0a505cfbd">More...</a><br /></td></tr>
+<tr class="separator:ad32dafd54a0c2f3222d2f8b0a505cfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple state machine for controlling the state of the elevator and keeping track of the last floor visited and the last direction used. </p>
@@ -190,6 +201,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stat
 
 <p>Get current state of elevator. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current state of the elevator in datatype state_state_type_t. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad32dafd54a0c2f3222d2f8b0a505cfbd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int state_get_elevator_above_last_floor </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get elevator_above_last_floor. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 if elevator below last floor passed, 1 if elevator above last floor passed. </dd></dl>
 
 </div>
 </div>

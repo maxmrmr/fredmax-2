@@ -60,7 +60,15 @@ void \hyperlink{state_8h_a35cda0255a2ec19fe780b71f66cbf04b}{state\+\_\+set\+\_\+
 int \hyperlink{state_8h_a93e4b49731ea0ab6cbddba3661e3ece9}{state\+\_\+get\+\_\+last\+\_\+floor} (void)
 \begin{DoxyCompactList}\small\item\em Get the last floor the elevator was in or passed. \end{DoxyCompactList}\item 
 void \hyperlink{state_8h_a32ffc2126a693223b02a00fbfb0cfde4}{state\+\_\+set\+\_\+last\+\_\+floor} (int current\+\_\+floor)
-\begin{DoxyCompactList}\small\item\em Set the last floor the elevator was in or passed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set the last floor the elevator was in or passed. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a5819a107206efcb8e8480dbf939772c6}{state\+\_\+set\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor} (void)\hypertarget{state_8h_a5819a107206efcb8e8480dbf939772c6}{}\label{state_8h_a5819a107206efcb8e8480dbf939772c6}
+
+\begin{DoxyCompactList}\small\item\em Set elevator\+\_\+above\+\_\+last\+\_\+floor. \end{DoxyCompactList}\item 
+void \hyperlink{state_8h_a2cbd42bc8385f2df72702a230a2c3732}{state\+\_\+clear\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor} (void)\hypertarget{state_8h_a2cbd42bc8385f2df72702a230a2c3732}{}\label{state_8h_a2cbd42bc8385f2df72702a230a2c3732}
+
+\begin{DoxyCompactList}\small\item\em Clear elevator\+\_\+above\+\_\+last\+\_\+floor. \end{DoxyCompactList}\item 
+int \hyperlink{state_8h_ad32dafd54a0c2f3222d2f8b0a505cfbd}{state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor} (void)
+\begin{DoxyCompactList}\small\item\em Get elevator\+\_\+above\+\_\+last\+\_\+floor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -82,6 +90,20 @@ Get current state of elevator.
 
 \begin{DoxyReturn}{Returns}
 The current state of the elevator in datatype state\+\_\+state\+\_\+type\+\_\+t. 
+\end{DoxyReturn}
+\index{state.\+h@{state.\+h}!state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor@{state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor}}
+\index{state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor@{state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor}!state.\+h@{state.\+h}}
+\subsubsection[{\texorpdfstring{state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor(void)}{state_get_elevator_above_last_floor(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int state\+\_\+get\+\_\+elevator\+\_\+above\+\_\+last\+\_\+floor (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{state_8h_ad32dafd54a0c2f3222d2f8b0a505cfbd}{}\label{state_8h_ad32dafd54a0c2f3222d2f8b0a505cfbd}
+
+
+Get elevator\+\_\+above\+\_\+last\+\_\+floor. 
+
+\begin{DoxyReturn}{Returns}
+0 if elevator below last floor passed, 1 if elevator above last floor passed. 
 \end{DoxyReturn}
 \index{state.\+h@{state.\+h}!state\+\_\+get\+\_\+last\+\_\+direction@{state\+\_\+get\+\_\+last\+\_\+direction}}
 \index{state\+\_\+get\+\_\+last\+\_\+direction@{state\+\_\+get\+\_\+last\+\_\+direction}!state.\+h@{state.\+h}}
