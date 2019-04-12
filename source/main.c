@@ -126,6 +126,12 @@ int main() {
 				if ((new_direction = queue_get_new_direction(state_get_last_floor(), state_get_last_direction()))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
+					if (state_get_last_direction() > 0){
+						elevator_above_last_floor = 1;
+					}
+					else{
+						elevator_above_last_floor = 0;
+					}
 					state_motor_started();
 				}
 			}
@@ -157,12 +163,6 @@ int main() {
 			//When arriving or passing a floor set last floor and set floor indicator light
 			if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
 				state_set_last_floor(current_floor);
-				if (state_get_last_direction() > 0){
-					elevator_above_last_floor = 1;
-				}
-				else{
-					elevator_above_last_floor = 0;
-				}
 				elev_set_floor_indicator(state_get_last_floor());
 
 
@@ -179,7 +179,7 @@ int main() {
 
 			//Check if state is IDLE_BETWEEN_FLOORS if it is, check orders and get correct new direction when between floors
 			if (state_get_current_state() == IDLE_BETWEEN_FLOORS) {
-				if ((new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), state_get_last_direction()))) {
+				if ((new_direction = queue_get_new_direction_if_between_floors((state_get_last_floor()), elevator_above_last_floor))) {
 					state_set_last_direction(new_direction);
 					elev_set_motor_direction(state_get_last_direction());
 					state_motor_started();

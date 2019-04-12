@@ -109,9 +109,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a6b9b2ad5801c12e0596d50745c476185"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queue_8h.html#a6b9b2ad5801c12e0596d50745c476185">queue_get_new_direction</a> (int last_floor, int last_direction)</td></tr>
 <tr class="memdesc:a6b9b2ad5801c12e0596d50745c476185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get new direction for elevator to excecute next order.  <a href="#a6b9b2ad5801c12e0596d50745c476185">More...</a><br /></td></tr>
 <tr class="separator:a6b9b2ad5801c12e0596d50745c476185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bbf667389b1dd7d3a9048c000c86c69"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queue_8h.html#a9bbf667389b1dd7d3a9048c000c86c69">queue_get_new_direction_if_between_floors</a> (int last_floor, int last_direction)</td></tr>
-<tr class="memdesc:a9bbf667389b1dd7d3a9048c000c86c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get new direction for elevator to excecute next order, if elevator is between floors.  <a href="#a9bbf667389b1dd7d3a9048c000c86c69">More...</a><br /></td></tr>
-<tr class="separator:a9bbf667389b1dd7d3a9048c000c86c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa1d1a341e7f13efab7cc2483d98166c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queue_8h.html#afa1d1a341e7f13efab7cc2483d98166c">queue_get_new_direction_if_between_floors</a> (int last_floor, int elevator_above_last_floor)</td></tr>
+<tr class="memdesc:afa1d1a341e7f13efab7cc2483d98166c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get new direction for elevator to excecute next order, if elevator is between floors.  <a href="#afa1d1a341e7f13efab7cc2483d98166c">More...</a><br /></td></tr>
+<tr class="separator:afa1d1a341e7f13efab7cc2483d98166c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a999706a53bfc6fbdaee0d4a1565f9638"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queue_8h.html#a999706a53bfc6fbdaee0d4a1565f9638">queue_check_orders_at_current_floor</a> (int current_floor, int last_direction)</td></tr>
 <tr class="memdesc:a999706a53bfc6fbdaee0d4a1565f9638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if elevator should stop when arriving at a floor.  <a href="#a999706a53bfc6fbdaee0d4a1565f9638">More...</a><br /></td></tr>
 <tr class="separator:a999706a53bfc6fbdaee0d4a1565f9638"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,7 +246,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queu
 
 </div>
 </div>
-<a class="anchor" id="a9bbf667389b1dd7d3a9048c000c86c69"></a>
+<a class="anchor" id="afa1d1a341e7f13efab7cc2483d98166c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -260,7 +260,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queu
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>last_direction</em>&#160;</td>
+          <td class="paramname"><em>elevator_above_last_floor</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -273,8 +273,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="queu
 <p>Get new direction for elevator to excecute next order, if elevator is between floors. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">last_floor</td><td>Last floor visited </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">last_direction,Last</td><td>direction traveled.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">last_floor</td><td>Last floor visited. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">elevator_above_last_floor</td><td>Number saying whether elevator is above or below last floor visited.</td></tr>
   </table>
   </dd>
 </dl>

@@ -14,7 +14,7 @@ void \hyperlink{queue_8h_a811bf4e93dd26735bea1cefa5bca4c02}{queue\+\_\+add\+\_\+
 \begin{DoxyCompactList}\small\item\em Add an order to queue. \end{DoxyCompactList}\item 
 int \hyperlink{queue_8h_a6b9b2ad5801c12e0596d50745c476185}{queue\+\_\+get\+\_\+new\+\_\+direction} (int last\+\_\+floor, int last\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Get new direction for elevator to excecute next order. \end{DoxyCompactList}\item 
-int \hyperlink{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors} (int last\+\_\+floor, int last\+\_\+direction)
+int \hyperlink{queue_8h_afa1d1a341e7f13efab7cc2483d98166c}{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors} (int last\+\_\+floor, int elevator\+\_\+above\+\_\+last\+\_\+floor)
 \begin{DoxyCompactList}\small\item\em Get new direction for elevator to excecute next order, if elevator is between floors. \end{DoxyCompactList}\item 
 int \hyperlink{queue_8h_a999706a53bfc6fbdaee0d4a1565f9638}{queue\+\_\+check\+\_\+orders\+\_\+at\+\_\+current\+\_\+floor} (int current\+\_\+floor, int last\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Check if elevator should stop when arriving at a floor. \end{DoxyCompactList}\item 
@@ -109,21 +109,21 @@ Get new direction for elevator to excecute next order.
 \end{DoxyReturn}
 \index{queue.\+h@{queue.\+h}!queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors@{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors}}
 \index{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors@{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors}!queue.\+h@{queue.\+h}}
-\subsubsection[{\texorpdfstring{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors(int last\+\_\+floor, int last\+\_\+direction)}{queue_get_new_direction_if_between_floors(int last_floor, int last_direction)}}]{\setlength{\rightskip}{0pt plus 5cm}int queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors (
+\subsubsection[{\texorpdfstring{queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors(int last\+\_\+floor, int elevator\+\_\+above\+\_\+last\+\_\+floor)}{queue_get_new_direction_if_between_floors(int last_floor, int elevator_above_last_floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int queue\+\_\+get\+\_\+new\+\_\+direction\+\_\+if\+\_\+between\+\_\+floors (
 \begin{DoxyParamCaption}
 \item[{int}]{last\+\_\+floor, }
-\item[{int}]{last\+\_\+direction}
+\item[{int}]{elevator\+\_\+above\+\_\+last\+\_\+floor}
 \end{DoxyParamCaption}
-)}\hypertarget{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}{}\label{queue_8h_a9bbf667389b1dd7d3a9048c000c86c69}
+)}\hypertarget{queue_8h_afa1d1a341e7f13efab7cc2483d98166c}{}\label{queue_8h_afa1d1a341e7f13efab7cc2483d98166c}
 
 
 Get new direction for elevator to excecute next order, if elevator is between floors. 
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em last\+\_\+floor} & Last floor visited \\
+\mbox{\tt in}  & {\em last\+\_\+floor} & Last floor visited. \\
 \hline
-\mbox{\tt in}  & {\em last\+\_\+direction,Last} & direction traveled.\\
+\mbox{\tt in}  & {\em elevator\+\_\+above\+\_\+last\+\_\+floor} & Number saying whether elevator is above or below last floor visited.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

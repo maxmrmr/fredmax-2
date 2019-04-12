@@ -25,7 +25,6 @@ int queue_get_new_direction(int last_floor, int last_direction);
 * @brief Get new direction for elevator to excecute next order, if elevator is between floors.
 *
 * @param [in] last_floor Last floor visited.
-* @param [in] last_direction Last direction traveled.
 * @param [in] elevator_above_last_floor Number saying whether elevator is above or below last floor visited.
 *
 * @return 0 if elevator is to stay idle, 1 if elevator is to run up, -1 if elevator is to run down.
