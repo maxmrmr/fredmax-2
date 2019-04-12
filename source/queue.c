@@ -6,10 +6,10 @@ void queue_add_order(int order){
 	queue[order] = 1;
 }
 
-int queue_get_new_direction_if_between_floors(int last_floor, int last_direction){
+int queue_get_new_direction_if_between_floors(int last_floor, int elevator_above_last_floor){
 	int i;
 	for (i=0; i<=11; i++){
-		if (last_direction < 0){
+		if (!(elevator_above_last_floor)){
 			if (queue[i]){
 				if (i < (last_floor)*3){ //Calculate number for order under position of elevator
 					return -1;
@@ -19,12 +19,12 @@ int queue_get_new_direction_if_between_floors(int last_floor, int last_direction
 				}
 			}
 		}
-		else if (last_direction > 0){
-			if (queue[i]){
-				if (i > ((last_floor)*3+2)){ //Calculate number for order over position of elevator
+		else if (elevator_above_last_floor){
+			if (queue[(11-i)]){
+				if ((11-i) > ((last_floor)*3+2)){ //Calculate number for order over position of elevator
 					return 1;
 				}
-				else if (i < (last_floor+1)*3){ //Calculate number for order under position of elevator
+				else if ((11-i) < (last_floor+1)*3){ //Calculate number for order under position of elevator
 					return -1;
 				}
 			}

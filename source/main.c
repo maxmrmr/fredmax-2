@@ -69,6 +69,7 @@ int main() {
 		clear_all_lamps();
 		int current_floor = -1; //Variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
 		int new_direction = 0;  //Variable used to temporarly hold new direction in if statement with queue_get_new_direction()
+		int elevator_above_last_floor = 0; //Variable used to check if elevator is above or below last known floor. 1 for above, 0 for below.
 
     elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
@@ -156,6 +157,12 @@ int main() {
 			//When arriving or passing a floor set last floor and set floor indicator light
 			if ((current_floor = elev_get_floor_sensor_signal()) != -1) {
 				state_set_last_floor(current_floor);
+				if (state_get_last_direction() > 0){
+					elevator_above_last_floor = 1;
+				}
+				else{
+					elevator_above_last_floor = 0;
+				}
 				elev_set_floor_indicator(state_get_last_floor());
 
 
