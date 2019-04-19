@@ -14,16 +14,16 @@
 * @brief Clear all lamps, used when initializing and when stop button is pressed
 */
 void clear_all_lamps(void){
-	int i;
-	for (i=0; i<=3; i++){
-		if (i != 3) {
-			elev_set_button_lamp(BUTTON_CALL_UP, i, 0);
-		}
-		if (i != 0) {
-			elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
-		}
-		elev_set_button_lamp(BUTTON_COMMAND, i, 0);
-	}
+    int i;
+    for (i=0; i<=3; i++){
+        if (i != 3) {
+            elev_set_button_lamp(BUTTON_CALL_UP, i, 0);
+        }
+        if (i != 0) {
+            elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
+        }
+        elev_set_button_lamp(BUTTON_COMMAND, i, 0);
+    }
 }
 
 /**
