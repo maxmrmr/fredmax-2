@@ -10,7 +10,7 @@ clock_t CURRENT_TIME;
 
 //Set a start time when starting the timer
 void timer_start(void){
-	START_TIME = clock();
+    START_TIME = clock();
 }
 
 //Check if 3 seconds has passed since start time was set
@@ -19,6 +19,6 @@ int timer_is_time_out(void){
     CURRENT_TIME = clock();
     if ((CURRENT_TIME - START_TIME) > STOP_TIME)
         return 1;
-	else
-		return 0;
+    else
+        return 0;
 }
