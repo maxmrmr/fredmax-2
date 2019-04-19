@@ -16,9 +16,9 @@ void timer_start(void){
 //Check if 3 seconds has passed since start time was set
 //If 3 seconds has passed return 1, else return 0
 int timer_is_time_out(void){
-	CURRENT_TIME = clock();
-	if ((CURRENT_TIME - START_TIME) > STOP_TIME)
-		return 1;
+    CURRENT_TIME = clock();
+    if ((CURRENT_TIME - START_TIME) > STOP_TIME)
+        return 1;
 	else
 		return 0;
 }

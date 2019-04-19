@@ -6,19 +6,19 @@ int last_floor;
 int elevator_above_last_floor;
 
 void state_init(void){
-	current_state = INITIALIZE;
+    current_state = INITIALIZE;
 }
 
 void state_arrived_at_any_floor(void){
-		current_state = IDLE;
+    current_state = IDLE;
 }
 
 void state_door_opened(void){
-	current_state = DOOR_OPEN;
+    current_state = DOOR_OPEN;
 }
 
 void state_timer_finished(void){
-		current_state = IDLE;
+    current_state = IDLE;
 }
 
 void state_motor_started(void){
