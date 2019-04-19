@@ -11,20 +11,20 @@ int queue_get_new_direction_if_between_floors(int last_floor, int elevator_above
 	for (i=0; i<=11; i++){
 		if (!(elevator_above_last_floor)){
 			if (queue[i]){
-				if (i < (last_floor)*3){ //Calculate number for order under position of elevator
+				if (i < (last_floor)*3){                //Calculate number for order under position of elevator
 					return -1;
 				}
-				else if (i > ((last_floor-1)*3+2)){ //Calculate number for order over position of elevator
+				else if (i > ((last_floor-1)*3+2)){     //Calculate number for order over position of elevator
 					return 1;
 				}
 			}
 		}
 		else if (elevator_above_last_floor){
 			if (queue[(11-i)]){
-				if ((11-i) > ((last_floor)*3+2)){ //Calculate number for order over position of elevator
+				if ((11-i) > ((last_floor)*3+2)){       //Calculate number for order over position of elevator
 					return 1;
 				}
-				else if ((11-i) < (last_floor+1)*3){ //Calculate number for order under position of elevator
+				else if ((11-i) < (last_floor+1)*3){    //Calculate number for order under position of elevator
 					return -1;
 				}
 			}
@@ -38,27 +38,27 @@ int queue_get_new_direction(int last_floor, int last_direction){
 	for (i=0; i<=11; i++){
 		if (last_direction < 0){
 			if (queue[i]){
-				if (i < (last_floor)*3){ //Calculate number for order under last floor
-					if (last_floor != 0){  //Not allowed to run down if at first floor
+				if (i < (last_floor)*3){                //Calculate number for order under last floor
+					if (last_floor != 0){               //Not allowed to run down if at first floor
 						return -1;
 					}
 				}
-				else if (i > ((last_floor)*3+2)){ //Calculate number for order over last floor
-					if (last_floor != 3){  //Not allowed to run up if at top floor
+				else if (i > ((last_floor)*3+2)){       //Calculate number for order over last floor
+					if (last_floor != 3){               //Not allowed to run up if at top floor
 						return 1;
 					}
 				}
 			}
 		}
 		else if (last_direction > 0){
-			if (queue[11-i]){ 				//Using 11-i to prioritize running up, because direction is up already
-				if ((11-i) > ((last_floor)*3+2)){ //Calculate number for order over last floor
-					if (last_floor != 3){  //Not allowed to run up if at top floor
+			if (queue[11-i]){ 				            //Using 11-i to prioritize running up, because direction is up already
+				if ((11-i) > ((last_floor)*3+2)){       //Calculate number for order over last floor
+					if (last_floor != 3){               //Not allowed to run up if at top floor
 						return 1;
 					}
 				}
-				else if ((11-i) < (last_floor)*3){ //Calculate number for order under last floor
-					if (last_floor != 0){  //Not allowed to run down if at first floor
+				else if ((11-i) < (last_floor)*3){      //Calculate number for order under last floor
+					if (last_floor != 0){               //Not allowed to run down if at first floor
 						return -1;
 					}
 				}
@@ -70,46 +70,46 @@ int queue_get_new_direction(int last_floor, int last_direction){
 
 
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
-//Check if order in same direction or command in current floor
+                                                        //Check if order in same direction or command in current floor
 	if (current_floor == 0){
-		if (queue[0] || queue[2]){ 	//Stop in bottom floor no matter what
+		if (queue[0] || queue[2]){ 	                    //Stop in bottom floor no matter what
 			return 1;
 		}
 	}
 	else if (current_floor == 1){
-		if (queue[5]){ 				//Check 2nd floor COMMAND
+		if (queue[5]){ 				                    //Check 2nd floor COMMAND
 			return 1;
 		}
 		if (last_direction < 0){
-			if (queue[4]){			//Check 2nd floor CALL_DOWN, if going down
+			if (queue[4]){			                    //Check 2nd floor CALL_DOWN, if going down
 				return 1;
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[3]){			//Check 2nd floor CALL_UP, if going up
+			if (queue[3]){			                    //Check 2nd floor CALL_UP, if going up
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 2){
-			if (queue[8]){			//Check 3rd floor COMMAND
+			if (queue[8]){			                    //Check 3rd floor COMMAND
 				return 1;
 			}
 		if (last_direction < 0){
-			if (queue[7]){			//Check 3rd floor CALL_DOWN, if going down
+			if (queue[7]){			                    //Check 3rd floor CALL_DOWN, if going down
 				return 1;
 			}
 		}
 
 		else if (last_direction > 0){
-			if (queue[6]){			//Check 3rd floor CALL_UP, if going up
+			if (queue[6]){			                    //Check 3rd floor CALL_UP, if going up
 				return 1;
 			}
 		}
 	}
 	else if (current_floor == 3){
-		if (queue[10] || queue[11]){	//Stop in top floor no matter what
+		if (queue[10] || queue[11]){	                //Stop in top floor no matter what
 			return 1;
 		}
 	}
@@ -130,8 +130,8 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 		}
 
 		if (current_floor == 1){
-			if ( (!queue[0]) && (!queue[1]) && (!queue[2]) ){ 	//Check if no orders in 1st floor
-				if (queue[3]){									//Check if order in 2nd floor, not in same direction or command
+			if ( (!queue[0]) && (!queue[1]) && (!queue[2]) ){ 	    //Check if no orders in 1st floor
+				if (queue[3]){									    //Check if order in 2nd floor, not in same direction or command
 					return 1;
 				}
 			}
@@ -149,8 +149,8 @@ int queue_check_orders_at_current_floor(int current_floor, int last_direction){
 		}
 
 		if (current_floor == 2){
-			if ( (!queue[9]) &&	(!queue[10]) && (!queue[11])){ 	//Check if no orders in 4th floor
-				if (queue[7]){									//Check if order in 3rd floor, not in same direction or command
+			if ( (!queue[9]) &&	(!queue[10]) && (!queue[11])){ 	    //Check if no orders in 4th floor
+				if (queue[7]){									    //Check if order in 3rd floor, not in same direction or command
 					return 1;
 				}
 			}
