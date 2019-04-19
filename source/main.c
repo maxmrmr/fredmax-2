@@ -55,18 +55,18 @@ void clear_lamps_in_current_floor(void){
 */
 int main() {
     // Initialize hardware
-		if (!elev_init()) {
+    if (!elev_init()) {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
 
-    //printf("Press STOP button to stop elevator and exit program.\n");
+    printf("Press STOP button to stop elevator and exit program.\n");
+    
 
     //Initialize elevator, if between floors drive down until any floor is reached
-
     state_init();
     queue_clear_all_orders();
-		clear_all_lamps();
+        clear_all_lamps();
 		int current_floor = -1; //Variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
 		int new_direction = 0;  //Variable used to temporarly hold new direction in if statement with queue_get_new_direction()
 
@@ -91,7 +91,7 @@ int main() {
 			elev_set_stop_lamp(1);
 			clear_all_lamps();
 
-			//if elevator is in a floor when stop button is pressed, open door
+			//If elevator is in a floor when stop button is pressed, open door
 			if (elev_get_floor_sensor_signal() >= 0){
 				elev_set_door_open_lamp(1);
 			}
@@ -155,7 +155,7 @@ int main() {
 				}
 
 				if (elev_get_button_signal(BUTTON_COMMAND, i)) {
-					queue_add_order((3 * i) + 2);                          //3*i for floor number, +2 for BUTTON_COMMAND
+                    queue_add_order((3 * i) + 2);                          //3*i for floor number, +2 for BUTTON_COMMAND
 					elev_set_button_lamp(BUTTON_COMMAND, i, 1);
 				}
 			}
