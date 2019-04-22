@@ -70,8 +70,8 @@ int main() {
         int current_floor = -1; //Variable used to temporarly hold current floor in if statement with elev_get_floor_sensor_signal()
         int new_direction = 0;  //Variable used to temporarly hold new direction in if statement with queue_get_new_direction()
 
-    elev_set_motor_direction(DIRN_DOWN);
     state_set_last_direction(DIRN_DOWN);
+    elev_set_motor_direction(DIRN_DOWN);
 
 
     while(elev_get_floor_sensor_signal() < 0){}

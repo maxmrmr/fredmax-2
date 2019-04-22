@@ -6,6 +6,7 @@ void queue_add_order(int order){
     queue[order] = 1;
 }
 
+//Returns 1 if elevator should run upwards, -1 if downwards and 0 if there are no orders
 int queue_get_new_direction_if_between_floors(int last_floor, int elevator_above_last_floor){
     int i;
     for (i=0; i<=11; i++){
@@ -68,7 +69,7 @@ int queue_get_new_direction(int last_floor, int last_direction){
     return 0;
 }
 
-
+//Returns 1 if elevator should stop at current floor
 int queue_check_orders_at_current_floor(int current_floor, int last_direction){
                                                         //Check if order in same direction or command in current floor
     if (current_floor == 0){
